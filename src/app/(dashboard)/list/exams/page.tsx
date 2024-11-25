@@ -4,6 +4,8 @@ import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { examsData, role } from "@/lib/data";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 type Exam = {
   id: number;
@@ -39,6 +41,15 @@ const columns = [
 ];
 
 const ExamListPage = () => {
+  const router= useRouter();
+const token= localStorage.getItem("ACCESS_TOKEN");
+
+
+if (!token) {
+  console.log("no token");
+ // router.push("/login");
+}
+
   const renderRow = (item: Exam) => (
     <tr
       key={item.id}

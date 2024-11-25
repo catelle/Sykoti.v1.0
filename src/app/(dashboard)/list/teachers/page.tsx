@@ -5,6 +5,8 @@ import TableSearch from "@/components/TableSearch";
 import { role, teachersData } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 type Teacher = {
   id: number;
@@ -55,6 +57,16 @@ const columns = [
 ];
 
 const TeacherListPage = () => {
+  const router= useRouter();
+const token= localStorage.getItem("ACCESS_TOKEN");
+
+
+if (!token) {
+  console.log("no token");
+ // router.push("/login");
+}
+
+
   const renderRow = (item: Teacher) => (
     <tr
       key={item.id}

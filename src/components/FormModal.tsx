@@ -33,7 +33,7 @@ const FormModal = ({
     | "teacher"
     | "student"
     | "parent"
-    | "subject"
+    | "urgence"
     | "class"
     | "lesson"
     | "exam"
