@@ -93,7 +93,8 @@ const Login = () => {
 
   return (
     <FormProvider {...methods}>
-      <div className="min-h-screen flex justify-center items-center bg-gray-900">
+      <div className="min-h-screen flex flex-col justify-center items-center bg-gray-900">
+        <img src="/logo.png" width={150} height={150} />
         <div className="max-w-md mx-auto p-8 bg-white shadow-md rounded">
           <h1 className="text-2xl font-semibold mb-6 text-center">Connexion</h1>
 

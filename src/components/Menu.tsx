@@ -171,11 +171,12 @@ const Menu = () => {
           href: "/list/news",
           visible: ["Sadmin", "admin","user","invite"],
         },
+       
         {
           icon: "/calendar.png",
           label: "Cyberambassador",
           href: "/list/events",
-          visible: [ "admin"],
+          visible: [ "admin","user"],
         },
         {
           icon: "/lesson.png",
@@ -196,9 +197,9 @@ const Menu = () => {
       title: "OTHER",
       items: [
         {
-          icon: "/profile.png",
-          label: "Profile",
-          href: "/profile",
+          icon: "/heart.png",
+          label: "Dons",
+          href: "/donate",
           visible: ["Sadmin", "admin", "user","invite"],
         },
         // {

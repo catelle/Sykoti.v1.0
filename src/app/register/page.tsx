@@ -135,8 +135,24 @@ const Register = () => {
 
   return (
     <FormProvider {...methods}>
-      <div className=" flex justify-center p-20 items-center bg-gray-900">
-        <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded">
+     <div className="flex justify-center items-center bg-gray-900 min-h-screen p-10">
+    {/* Left Side - Lottie Animation */}
+    <div className="hidden lg:block w-1/2 flex justify-center items-center">
+      <div className="max-w-lg">
+        
+        {/* Replace this with your Lottie animation */}
+        {/* <Lottie 
+          animationData={animationData} 
+          loop 
+          autoplay 
+          className="w-full h-full" 
+        /> */}
+      </div>
+    </div>
+
+    {/* Right Side - Form */}
+    <div className="w-full lg:w-1/2 max-w-md mx-auto p-6 bg-white shadow-md rounded">
+   
           <h1 className="text-2xl font-semibold mb-6 text-center">Creer un compte</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
           {formError && (
