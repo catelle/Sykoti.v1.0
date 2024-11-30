@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { auth, db } from "@/lib/firebaseSetup";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Error from "next/error";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
+import InstallPWAButton from "@/components/InstallPromt";
 
 // Define interface for form data
 interface LoginFormInputs {
@@ -95,8 +96,9 @@ const Login = () => {
     <FormProvider {...methods}>
       <div className="min-h-screen flex justify-center items-center bg-gray-900">
         <div className="max-w-md mx-auto p-8 bg-white shadow-md rounded">
-          <h1 className="text-2xl font-semibold mb-6 text-center">Connexion</h1>
-
+          <InstallPWAButton/>
+        <div className="flex items-center justify-center space-x-2 "><img src="/img/logo.png" width={50} height={50} className="mb-8" /><h1 className="text-2xl font-semibold mb-6 text-center">Connexion</h1></div>
+   
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-6 space-y-4">
             <FormMessage>{errors.password?.message}</FormMessage>
@@ -110,6 +112,7 @@ const Login = () => {
                     <FormControl>
                       <Input
                         {...field}
+                        className="bg-white border-gray-300"
                         type="email"
                         placeholder="Email"
                         disabled={loading}
@@ -133,7 +136,7 @@ const Login = () => {
             type={showPassword ? "text" : "password"}
             placeholder="Mot de passe"
             disabled={loading}
-            className="pr-10"
+            className="bg-white border-gray-300"
           />
           <button
             type="button"

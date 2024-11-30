@@ -99,13 +99,23 @@ const fetchUser = async (): Promise<User[]> => {
 
 const UserListPage = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const token = localStorage.getItem("ACCESS_TOKEN");
   const router= useRouter();
 
+  const [token, setToken] = useState<string | null>(null);
+  
+  
+ 
   if (!token) {
     console.log("no token");
    // router.push("/login");
   }
+
+  useEffect(() => {
+    // Access localStorage on the client
+    const token =  localStorage.getItem("ACCESS_TOKEN");
+    setToken(token);
+  }, []); // Empty dependency array ensures it runs once on the client
+
 
 
   useEffect(() => {

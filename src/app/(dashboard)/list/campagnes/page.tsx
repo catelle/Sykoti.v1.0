@@ -32,16 +32,30 @@ const CampagnePage =  () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
-  const token = localStorage.getItem("ACCESS_TOKEN");
+
   const [user, loading, error] = useAuthState(auth);
   const [type1, setType1]= useState("");
   const [type2, setType2]= useState("");
   const [type3, setType3]= useState("");
+  const [token, setToken] = useState<string | null>(null);
+  
+  
+ 
+    if (!token) {
+      console.log("no token");
+     // router.push("/login");
+    }
 
-  if (!token) {
-    console.log("no token");
-   // router.push("/login");
-  }
+    useEffect(() => {
+      setIsClient(true); // Mark as client-side
+      const token = localStorage.getItem("ACCESS_TOKEN");
+      setToken(token);
+    }, []);
+  
+    if (!isClient) {
+      return null; // Avoid rendering on the server
+    }
+
 
   useEffect(() => {
     const getUserData = async () => {

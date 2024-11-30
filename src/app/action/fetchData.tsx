@@ -1,5 +1,5 @@
 import { db } from "@/lib/firebaseSetup";
-import { arrayUnion, collection, doc, getDoc, getDocs, increment, updateDoc } from "firebase/firestore";
+import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, increment, updateDoc } from "firebase/firestore";
 import { User } from "lucide-react";
 import { Dangrek } from "next/font/google";
 import { date } from "zod";
@@ -37,6 +37,23 @@ export const incrementVote = async (itemId: string, userId: string) => {
     }
 };
 
+export const saveToContributors = async (data: any) => {
+  try {
+    await addDoc(collection(db, "ContributorsCollection"), data);
+    console.log("Contributor saved!");
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
+
+export const saveToComEmail = async (email: any) => {
+  try {
+    await addDoc(collection(db, "comEmailCollection"), { email });
+    console.log("Email saved!");
+  } catch (e) {
+    console.error("Error adding email: ", e);
+  }
+};
 export const fetchNewsItems = async () => {
   try {
     // Reference the 'history' collection
@@ -296,7 +313,7 @@ const fetchHistoryItems = async () => {
           storyCat: temDoc.data().storyCat,
           country: temDoc.data().country,
           platform: temDoc.data().platform,
-          developpement: temDoc.data().content,
+          developpement: temDoc.data().developpement,
           email: temDoc.data().email,
           introduction: temDoc.data().introduction,
           likecount: temDoc.data().likeCount,

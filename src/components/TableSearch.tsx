@@ -3,7 +3,8 @@ import Image from "next/image";
 import { collection, query, where, getDocs, doc, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebaseSetup";
 import { useRouter } from "next/navigation";
-import DetailModal from "@/app/(dashboard)/list/DetailsComponent/page";
+import DetailScamModal from "./DatailScamModal";
+
 
 // Define types for search results
 interface SearchResult {
@@ -120,7 +121,7 @@ const TableSearch: React.FC = () => {
     <div ref={searchRef}>
     <div className="flex items-center gap-2 p-2 bg-transparent dark:bg-white dark:border-gray-300 outline-none text-xs rounded-full ring-[1.5px] ring-gray-300">
       <button onClick={handleSearch} className="text-white p-2">
-        <Image src="/search.png" alt="Search" width={14} height={14} />
+        <Image src="/img/search.png" alt="Search" width={14} height={14} />
       </button>
       <input
         type="text"
@@ -160,7 +161,7 @@ const TableSearch: React.FC = () => {
       </div>
     )}
 
-    {selectedItem && <DetailModal item={selectedItem} onClose={closeModal} />}
+    {selectedItem && <DetailScamModal item={selectedItem} onClose={closeModal} />}
   </div>
   
   );

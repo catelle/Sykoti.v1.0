@@ -123,7 +123,7 @@ const Register = () => {
       // Send email verification
       await sendEmailVerification(user);
       alert("Email de vérification envoyé. Veuillez vérifier votre boîte de réception.");
-      router.push("/login");
+      router.push("/");
 
     } catch (error) {
       console.log(error);
@@ -135,9 +135,9 @@ const Register = () => {
 
   return (
     <FormProvider {...methods}>
-     <div className="flex justify-center items-center bg-gray-900 min-h-screen p-10">
+     <div className="flex  justify-center items-center bg-gray-900 min-h-screen p-10">
     {/* Left Side - Lottie Animation */}
-    <div className="hidden lg:block w-1/2 flex justify-center items-center">
+    {/* <div className="hidden lg:block w-1/2 flex justify-center items-center">
       <div className="max-w-lg">
         
         {/* Replace this with your Lottie animation */}
@@ -146,14 +146,14 @@ const Register = () => {
           loop 
           autoplay 
           className="w-full h-full" 
-        /> */}
+        /> 
       </div>
-    </div>
+    </div> */}
 
     {/* Right Side - Form */}
-    <div className="w-full lg:w-1/2 max-w-md mx-auto p-6 bg-white shadow-md rounded">
+    <div className="w-[400px] lg:w-1/2 max-w-md mx-auto p-6 bg-white shadow-md rounded">
    
-          <h1 className="text-2xl font-semibold mb-6 text-center">Creer un compte</h1>
+    <div className="flex items-center justify-center space-x-2 "><img src="/img/logo.png" width={50} height={50} className="mb-8" /><h1 className="text-2xl font-semibold mb-6 text-center">Créer un compte</h1></div>
           <form onSubmit={handleSubmit(onSubmit)}>
           {formError && (
                 <div className="mt-4 text-red-500 text-sm">
@@ -203,19 +203,22 @@ const Register = () => {
                 )}
               />
 
-              {/* Phone Field */}
-              <FormField
+             {/* Phone Field */}
+{/* Phone Field */}
+<FormField
                 name="phone"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem >
                     <FormLabel>Numéro de téléphone</FormLabel>
-                    <FormControl>
+                    <FormControl  className="w-[400px]">
                       <PhoneInput country={'cm'} {...field} disabled={loading} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
+
 
               {/* Photo Upload Field */}
               <FormField
@@ -318,7 +321,7 @@ const Register = () => {
               </Button>
 
               <p className="message">
-                Already Registered? <Link href="/login" className="text-red-500">Sign in</Link>
+                Already Registered? <Link href="/" className="text-red-500">Sign in</Link>
               </p>
 
              

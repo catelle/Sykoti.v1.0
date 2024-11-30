@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
+import DonationModal from "./DialogDonation";
 
 interface UserData {
   uid: string;
@@ -89,13 +90,13 @@ const Menu = () => {
       title: "MENU",
       items: [
         {
-          icon: "/home.png",
+          icon: "/img/home.png",
           label: "Home",
           href: "/student",
           visible: [ "admin", "user", "invite"],
         },
         {
-          icon: "/teacher.png",
+          icon: "/img/teacher.png",
           label: "Mes Clients",
           href: "/list/clients",
           visible: ["Sadmin"],
@@ -104,13 +105,13 @@ const Menu = () => {
           },
         },        
         {
-          icon: "/student.png",
+          icon: "/img/student.png",
           label: "Mes Admins",
           href: "/list/clients",
           visible: ["Sadmin"],
         },
         {
-          icon: "/parent.png",
+          icon: "/img/parent.png",
           label: "Mes partenaires",
           href: "/list/students",
           visible: ["Sadmin"],
@@ -134,59 +135,54 @@ const Menu = () => {
         //   visible: ["client","admin"],
         // },
         {
-           icon: "/lesson.png",
+           icon: "/img/lesson.png",
           label: "ScamsToV",
           href: "/list/forms/Vscam",
           visible: ["admin"],
         },
         
         {
-          icon: "/assignment.png",
+          icon: "/img/assignment.png",
           label: "Mes astuces",
           href: "/list/astuces",
           visible: ["user","admin","invite"],
         },
         {
-          icon: "/result.png",
+          icon: "/img/result.png",
           label: "Lois pays",
           href: "/list/lois",
           visible: ["user","admin","invite"],
         },
         {
-          icon: "/attendance.png",
+          icon: "/img/attendance.png",
           label: "Alerte Scam",
           href: "/list/scams",
           visible: ["Sadmin",  "user", "admin","invite"],
         },
         
         {
-          icon: "/message.png",
+          icon: "/img/message.png",
           label: "Temoignages",
           href: "/list/temoignage",
           visible: ["Sadmin", "admin", "user","invite"],
         },
         {
-          icon: "/announcement.png",
+          icon: "/img/announcement.png",
           label: "News",
           href: "/list/news",
           visible: ["Sadmin", "admin","user","invite"],
         },
        
+       
         {
-          icon: "/calendar.png",
-          label: "Cyberambassador",
-          href: "/list/events",
-          visible: [ "admin","user"],
-        },
-        {
-          icon: "/lesson.png",
+          icon: "/img/lesson.png",
           label: "Urgences",
           href: "/list/urgences",
           visible: ["Sadmin", "admin"],
         },
        
         {
-          icon: "/subject.png",
+          icon: "/img/subject.png",
           label: "addNews",
           href: "/list/forms/news",
           visible: ["Sadmin", "admin"],
@@ -197,19 +193,20 @@ const Menu = () => {
       title: "OTHER",
       items: [
         {
-          icon: "/heart.png",
-          label: "Dons",
-          href: "/donate",
-          visible: ["Sadmin", "admin", "user","invite"],
+          icon: "/img/calendar.png",
+          label: "Cyberambassador",
+          href: "/cybera",
+          visible: [ "admin","user"],
         },
-        // {
-        //   icon: "/setting.png",
-        //   label: "Settings",
-        //   href: "/settings",
-        //   visible: ["Sadmin", "admin", "user", "client"],
-        // },
+       
         {
-          icon: "/logout.png",
+          icon: "/img/profile.png",
+          label: "A propos",
+          href: "/vision",
+          visible: ["Sadmin", "admin", "user", "client"],
+        },
+        {
+          icon: "/img/logout.png",
           label: "Logout",
           href: "/logout",
           visible: ["Sadmin", "admin", "user", "client"],
@@ -266,7 +263,9 @@ const Menu = () => {
           return null; // Return null if the item is not visible
         })}
       </div>
+      
     ))}
+    
   </div>
   
   );

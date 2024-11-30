@@ -57,7 +57,7 @@ const Help = () => {
       const getUserData = async () => {
           if (loading) return; // Wait for loading to finish
           if (error) {
-              console.error("Error in auth state:", error);
+             // console.error("Error in auth state:", error);
              router.push("/login");
               return;
           }
@@ -69,14 +69,14 @@ const Help = () => {
                 setPseudo(data.pseudo);
                 setRole(data.role);
                 setPhoto(data.photo);
-                console.log(user.uid);
+               // console.log(user.uid);
                 
               } else {
-                  console.log("User not found in both collections");
+                //  console.log("User not found in both collections");
                   router.push("/login");
               }
           } else {
-              console.log("No user is logged in");
+             // console.log("No user is logged in");
              router.push("/login");
           }
       };
@@ -146,7 +146,7 @@ const Help = () => {
           await uploadBytes(storageRef, file);
           imageUrl = await getDownloadURL(storageRef);
         } catch (error) {
-          console.error('Error uploading file:', error);
+         // console.error('Error uploading file:', error);
           return;
         }
       }
@@ -157,7 +157,7 @@ const Help = () => {
       showNotification();
       setIsSubmitting(false);
     } catch (error) {
-      console.log('Error adding document: ', error);
+     // console.log('Error adding document: ', error);
       setErrors({ general: ['An error occurred while adding the scam item.'] });
     }
 
@@ -176,7 +176,7 @@ const Help = () => {
     const user = auth.currentUser;
 
     if (!user) {
-      console.error('No user is currently signed in.');
+    //  console.error('No user is currently signed in.');
       return;
     }
 
@@ -206,18 +206,18 @@ const Help = () => {
           await uploadBytes(storageRef, file);
           imageUrl = await getDownloadURL(storageRef);
         } catch (error) {
-          console.error('Error uploading file:', error);
+         // console.error('Error uploading file:', error);
           return;
         }
       }
 
       payload.image = imageUrl; // Now this is valid because `image` is part of the Payload type
       await addDoc(collection(db, 'UrgenceCollection'), payload);
-      console.log('Document successfully written!');
+      //console.log('Document successfully written!');
       showNotification();
       setIsSubmitting(false);
     } catch (error) {
-      console.log('Error adding document: ', error);
+     // console.log('Error adding document: ', error);
       setErrors({ general: ['An error occurred while adding the alert item.'] });
     }
 
@@ -257,7 +257,7 @@ const Help = () => {
 
   
       <div className="mb-4">
-        <label htmlFor="incident-date" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Date de l'Incident:</label>
+        <label htmlFor="incident-date" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Date de l&apos;Incident:</label>
         <input
           ref={incidentdateRef}
           type="date"
@@ -270,7 +270,7 @@ const Help = () => {
       </div>
   
       <div className="mb-4">
-        <label htmlFor="platform" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Platform:</label>
+        <label htmlFor="platform" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Plateform:</label>
         <select
           className="mt-1 block w-full p-3 border border-gray-300  dark:bg-gray-700 dark:text-gray-200  rounded-md"
           value={selectedPlatform}
@@ -326,7 +326,7 @@ const Help = () => {
           <option value="Cameroun">Cameroun</option>
           <option value="France">France</option>
           <option value="Belgique">Belgique</option>
-          <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+          <option value="Côte d'Ivoire">Côte d`&apos;`Ivoire</option>
           <option value="Autres">Autres</option>
         </select>
       </div>

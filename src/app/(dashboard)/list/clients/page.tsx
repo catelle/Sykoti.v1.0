@@ -89,13 +89,22 @@ const ParentListPage = () => {
   const router = useRouter();
   const [form, setForm]= useState(false);
   const [clients, setClients] = useState<Client[]>([]);
-  const token = localStorage.getItem("ACCESS_TOKEN");
+ 
+  const [token, setToken] = useState<string | null>(null);
   
-
+  
+ 
   if (!token) {
     console.log("no token");
    // router.push("/login");
   }
+
+  useEffect(() => {
+    // Access localStorage on the client
+    const token =  localStorage.getItem("ACCESS_TOKEN");
+    setToken(token);
+  }, []); // Empty dependency array ensures it runs once on the client
+
 
 
   useEffect(() => {

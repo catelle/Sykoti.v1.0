@@ -94,10 +94,10 @@ const Login = () => {
   return (
     <FormProvider {...methods}>
       <div className="min-h-screen flex flex-col justify-center items-center bg-gray-900">
-        <img src="/logo.png" width={150} height={150} />
+        
         <div className="max-w-md mx-auto p-8 bg-white shadow-md rounded">
-          <h1 className="text-2xl font-semibold mb-6 text-center">Connexion</h1>
-
+        <div className="flex items-center justify-center space-x-2 "><img src="/img/logo.png" width={50} height={50} className="mb-8" /><h1 className="text-2xl font-semibold mb-6 text-center">Connexion</h1></div>
+   
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-6 space-y-4">
             <FormMessage>{errors.password?.message}</FormMessage>

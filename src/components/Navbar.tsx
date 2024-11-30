@@ -12,10 +12,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { ToolsDropdown } from "./Tools";
 import Notification from "./Notification";
-import UnreadNewsNotification, { unreadNewsNumber } from "./UnreadNotification";
 import { fetchNewsItems } from "@/app/action/fetchData";
 import TableSearch from "./TableSearch";
 import ThemeToggle from "./ThemeToggle";
+import UnreadNewsNotification from "./UnreadNotification";
 
 interface UserData {
   uid: string;
@@ -143,15 +143,21 @@ const Navbar = () => {
     }}
   };
 
+  const [unreadNewsCount, setUnreadNewsCount] = useState(0);
+
+  const handleUnreadNewsCountChange = (count: number) => {
+    setUnreadNewsCount(count);
+  };
+
   return (
-    <div className="sticky top-0 flex bg-white dark:bg-gray-800 items-center justify-between p-4 z-[1000]">
+    <div className="sticky top-0 flex bg-white dark:bg-gray-800 items-center justify-between p-2 z-[1000]">
   {/* SEARCH BAR */}
   <div className="hidden md:flex items-center gap-2 text-xs px-2 dark:text-gray-200">
     <TableSearch />
   </div>
 
   {/* ICONS AND USER */}
-  <div className="flex items-center gap-6 justify-end w-full">
+  <div className="flex items-center gap-4 justify-end w-full">
   <div className=" text-red-500 text-xl ml-6 leading-3 font-medium dark:text-red-500"
   >
      <button
@@ -165,13 +171,14 @@ const Navbar = () => {
       <Notification userId={user?.uid || ''} />
     </div>
     <div className="bg-white dark:bg-gray-800 rounded-full w-7 h-7 flex items-center justify-center cursor-pointer relative">
-      <UnreadNewsNotification
-        newsItems={items}
-        userId={user?.uid || ''}
-        markAsRead={markAsRead}
+    <UnreadNewsNotification
+        newsItems={items} // Pass your news items here
+        userId="user123" // Replace with the actual user ID
+        markAsRead={markAsRead} // Replace with the actual function
+        onUnreadNewsCountChange={handleUnreadNewsCountChange} // Pass the callback
       />
       <div className="absolute bg-red-500 -top-3 -right-3 w-5 h-5 flex items-center justify-center text-white rounded-full text-xs">
-        {unreadNewsNumber}
+      {unreadNewsCount}
       </div>
     </div>
     <ThemeToggle />
@@ -190,7 +197,7 @@ const Navbar = () => {
     {!photo && (
        <div>
       <Image
-        src="/avatar.png"
+        src="/img/avatar.png"
         alt=""
         width={36}
         height={36}

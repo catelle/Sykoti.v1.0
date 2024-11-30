@@ -59,17 +59,17 @@ const DetailLoiView = () => {
         try {
           const astuceItems = await fetchAstuceItems();
           const foundItem = astuceItems.find((astuce) => astuce.id === id);
-  
+          //console.log(foundItem);
           setItem(foundItem ? {
             id: foundItem.id,
             image: foundItem.image || '',
             titre: foundItem.titre || '',
+            conclusion: foundItem.conclusion,
             category: foundItem.category || '',
             intro: foundItem.intro || '',
             date: foundItem.date && foundItem.date.seconds
               ? new Date(foundItem.date.seconds * 1000).toLocaleDateString()
               : '',
-            conclusion: foundItem.conclusion || '',
             T1: foundItem.t1 || '',
             T2: foundItem.t2 || '',
             T3: foundItem.t3 || '',
@@ -101,8 +101,9 @@ const DetailLoiView = () => {
             P14: foundItem.P14 || '',
             P15: foundItem.P15 || ''
           } : null);
+         // console.log(item?.conclusion);
         } catch (error) {
-          console.error("Error fetching item:", error);
+         // console.error("Error fetching item:", error);
         } finally {
           setLoading(false);
         }

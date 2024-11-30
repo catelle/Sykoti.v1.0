@@ -47,7 +47,7 @@ const Submittedalerts: React.FC = () => {
       await deleteDoc(docRef);
       setScam(scams.filter(scam => scam.id !== id));
     } catch (error) {
-      console.error("There was an error deleting the alert!", error);
+     // console.error("There was an error deleting the alert!", error);
     }
   };
 
@@ -66,7 +66,7 @@ const Submittedalerts: React.FC = () => {
         scams.map((scam) => (scam.id === id ? { ...scam, status: 'verified' } : scam))
       );
     } catch (error) {
-      console.error('There was an error verifying the scam!', error);
+    //  console.error('There was an error verifying the scam!', error);
     }
   };
 

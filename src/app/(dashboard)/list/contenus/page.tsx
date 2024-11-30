@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { db } from "@/lib/firebaseSetup";
 import { collection, addDoc, getDocs } from "firebase/firestore";
@@ -30,13 +31,23 @@ const AddContent: React.FC = () => {
   const [globalDescription, setGlobalDescription] = useState<string>(""); // State for global description
   const [contents, setContents] = useState<{ title: string; type: string }[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const token = localStorage.getItem("ACCESS_TOKEN");
   const router= useRouter();
-
+  const [token, setToken] = useState<string | null>(null);
+  
+  
+ 
   if (!token) {
     console.log("no token");
    // router.push("/login");
   }
+
+  useEffect(() => {
+    // Access localStorage on the client
+    const token =  localStorage.getItem("ACCESS_TOKEN");
+    setToken(token);
+  }, []); // Empty dependency array ensures it runs once on the client
+
+
 
 
   const fetchContents = async () => {
@@ -192,7 +203,7 @@ const AddContent: React.FC = () => {
           <div key={index} className="border p-4 rounded-md">
             <h2 className="font-semibold">Sequence {index + 1}</h2>
             <div>
-              <label htmlFor={`response1-${index}`}>Message a l'utilisateur:</label>
+              <label htmlFor={`response1-${index}`}>Message a l`&apos;`utilisateur:</label>
               <input
                 type="text"
                 id={'message'}

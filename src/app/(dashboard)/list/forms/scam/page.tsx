@@ -61,7 +61,7 @@ const Addscam: React.FC = () => {
           await uploadBytes(storageRef, file);
           imageUrl = await getDownloadURL(storageRef);
         } catch (error) {
-          console.error('Error uploading file:', error);
+          //console.error('Error uploading file:', error);
           return;
         }
       }
@@ -72,7 +72,7 @@ const Addscam: React.FC = () => {
       alert('Document successfully written!');
       showNotification();
     } catch (error) {
-      console.error('Error adding document: ', error);
+     // console.error('Error adding document: ', error);
       setErrors({ general: ['An error occurred while adding the scam item.'] });
     } finally {
       setIsLoading(false); // End loading
@@ -121,7 +121,7 @@ const Addscam: React.FC = () => {
 
     {/* Form Fields */}
     <div className="mb-6">
-      <label htmlFor="incidentDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Date de l'Incident:</label>
+      <label htmlFor="incidentDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Date de l&apos;Incident:</label>
       <input
         ref={incidentdateRef}
         style={{ borderRadius: '5px' }}
@@ -134,7 +134,7 @@ const Addscam: React.FC = () => {
     </div>
 
     <div className="mb-6">
-      <label htmlFor="platform" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Platform:</label>
+      <label htmlFor="platform" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Plateforme:</label>
       <select
         className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 dark:bg-gray-700 dark:text-gray-200 "
         value={selectedPlatform}
@@ -191,7 +191,7 @@ const Addscam: React.FC = () => {
     </div>
 
     <div className="mb-6">
-      <label htmlFor="content" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Description de l'Escroquerie:</label>
+      <label htmlFor="content" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Description de l&apos;Escroquerie:</label>
       <textarea
         ref={contentRef}
         style={{ borderRadius: '5px' }}
@@ -217,7 +217,7 @@ const Addscam: React.FC = () => {
     </div>
 
     <div className="mb-6">
-      <label htmlFor="image" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Preuves (Captures d'écran, etc.)</label>
+      <label htmlFor="image" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Preuves (Captures d&apos;écran, etc.)</label>
       <div className="mt-2">
         <input
           ref={imageRef}

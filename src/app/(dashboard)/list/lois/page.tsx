@@ -68,7 +68,7 @@ const ResultListPage = () => {
         const astuceItems = await fetchLoisItems();
         setItems(astuceItems);
       } catch (error) {
-        console.error("Error fetching astuce items:", error);
+       // console.error("Error fetching astuce items:", error);
       }
     };
 
@@ -101,9 +101,9 @@ const ResultListPage = () => {
     : items;
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-4 rounded-md flex-1 m-4 mt-4 relative">
+    <div className="bg-white dark:bg-gray-800 p-4 rounded-md flex-1 m-6  mt-10 relative">
     {/* TOP */}
-    <div className="flex items-center justify-between">
+    <div className="flex items-center  mt-6  justify-between">
       <h1 className="hidden md:block text-lg font-semibold text-gray-900 dark:text-white">
         Lois Cybersécurité en Afrique francophone
       </h1>
@@ -114,7 +114,7 @@ const ResultListPage = () => {
             className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow"
             onClick={() => setIsDropdownVisible((prev) => !prev)}
           >
-            <Image src="/filter.png" alt="Filter" width={14} height={14} />
+            <Image src="/img/filter.png" alt="Filter" width={14} height={14} />
           </button>
   
           {isDropdownVisible && (

@@ -6,8 +6,9 @@ import TableSearch from "@/components/TableSearch";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { role } from "@/lib/data";
-import DetailModal from "../DetailsComponent/page";
 import { useRouter } from "next/navigation";
+import DetailScamModal from "@/components/DatailScamModal";
+
 
 type ScamItem = {
   id: string;
@@ -48,8 +49,15 @@ const ScamView = ({ scam, onClick }: { scam: ScamItem; onClick: (item: ScamItem)
     {/* Display badge only when image is not expanded and status is verified */}
     {!isExpanded && scam.status === "verified" && (
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="bg-green-500 text-white font-bold p-1 rounded-full">
-          ✔️
+        <span className=" text-2xl text-red-500 font-bold p-1 rounded-full">
+        FAKE
+        </span>
+      </div>
+    )}
+    {!isExpanded && scam.status !== "verified" && (
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className=" bg-orange-500 text-white font-bold p-1 rounded-full">
+        Attention
         </span>
       </div>
     )}
@@ -95,7 +103,7 @@ const ScamsPage = () => {
         const scamItems = await fetchScamsItems();
         setItems(scamItems);
       } catch (error) {
-        console.error("Error fetching scam items:", error);
+       // console.error("Error fetching scam items:", error);
       }
     };
     loadScamItems();
@@ -152,7 +160,7 @@ const ScamsPage = () => {
             className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow"
             onClick={() => setIsDropdownVisible((prev) => !prev)}
           >
-            <Image src="/filter.png" alt="Filter" width={14} height={14} />
+            <Image src="/img/filter.png" alt="Filter" width={14} height={14} />
           </button>
   
           {/* Dropdown */}
@@ -189,7 +197,7 @@ const ScamsPage = () => {
               onClick={handleClick}
               className="cursor-pointer bg-lamaYellow w-8 h-8 flex items-center justify-center rounded-full"
             >
-              <Image src={"/create.png"} alt="Create Icon" width={16} height={16} />
+              <Image src={"/img/create.png"} alt="Create Icon" width={16} height={16} />
             </div>
           )}
         </div>
@@ -207,7 +215,7 @@ const ScamsPage = () => {
     <Pagination />
   
     {/* MODAL */}
-    {selectedItem && <DetailModal item={selectedItem} onClose={closeModal} />}
+    {selectedItem && <DetailScamModal item={selectedItem} onClose={closeModal} />}
   </div>
   
 

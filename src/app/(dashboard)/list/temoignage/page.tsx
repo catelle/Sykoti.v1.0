@@ -50,18 +50,19 @@ const TemView = ({
 
   return (
 <div
-className="assignment-item flex items-center border-b border-gray-200 dark:border-gray-700 p-4 hover:bg-lamaPurpleLight dark:hover:bg-gray-700"
+className="assignment-item flex items-center border-b border-gray-200 dark:border-gray-700 p-4 hover:bg-lamaPurpleLight dark:hover:bg-lamaPurpleDark"
 onClick={() => onClick(temoignage)}
 >
 <Image
-  src={temoignage.image}
+  src={temoignage.image||"/img/avatar.png"}
   alt={temoignage.title}
-  width={50}
-  height={50}
+  width={70}
+  height={70}
+  style={{ borderRadius: '15px' }}
   className="mr-4"
 />
-<div className="flex-1">
-  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+<div>
+<h3 className="text-lg font-semibold text-gray-800 dark:text-white">
     {temoignage.title}
   </h3>
   <p className="text-gray-500 dark:text-gray-400">{temoignage.storyCat}</p>
@@ -73,13 +74,13 @@ onClick={() => onClick(temoignage)}
         }`}
         onClick={(e) => onClick(temoignage)}
       >
-        👍 {temoignage.likecount} Likes
+        👍 {temoignage.likes?.length||0} Likes
       </button>
     </span>
-    <span>👀 {temoignage.votecount} Vues</span>
-  </div>
+    <span>👀 {temoignage.votes?.length} Vues</span></div>
 </div>
 </div>
+
 
   );
 };
@@ -124,7 +125,7 @@ const TemoignageListPage = () => {
     try {
       // Check if the user has already voted
       if (Array.isArray(itemsend.votes) && itemsend.votes.includes(user?.uid || "")) {
-        console.log("User has already voted on this item.");
+      //  console.log("User has already voted on this item.");
       } else {
         // Increment the vote count in the database only if the user hasn't voted
         await incrementVote(itemId, user?.uid || "");
@@ -144,10 +145,10 @@ const TemoignageListPage = () => {
           )
         );
   
-        console.log("Vote incremented successfully!");
+        //console.log("Vote incremented successfully!");
       }
     } catch (error) {
-      console.error("Error incrementing the vote:", error);
+     // console.error("Error incrementing the vote:", error);
   
       // Optionally, you could display a user-friendly error message here
       alert("Failed to vote for the item. Please try again later.");
@@ -156,7 +157,7 @@ const TemoignageListPage = () => {
     if (itemId) {
       router.push(`/list/detailsView?id=${itemId}`);
     } else {
-      console.error("Item ID is undefined");
+     // console.error("Item ID is undefined");
     }
   };
   
@@ -172,8 +173,8 @@ const TemoignageListPage = () => {
     : items;
 
   return (
-    <div className="bg-white p-4 rounded-md flex-1 mt-4 relative h-screen ml-4  dark:bg-gray-800">
-    {/* TOP HEADER (Fixed) */}
+    <div className="bg-white  dark:bg-gray-800 p-4 rounded-md flex-1 w-full m-4 mt-6 relative">
+        {/* TOP HEADER (Fixed) */}
     <div className="sticky top-0 bg-white z-10 p-4 dark:bg-gray-800">
       <div className="flex items-center justify-between">
         <h1 className="hidden md:block text-lg font-semibold text-gray-800 dark:text-white">
@@ -204,7 +205,7 @@ const TemoignageListPage = () => {
                 onClick={handleClick}
                 className="cursor-pointer bg-lamaYellow w-8 h-8 flex items-center justify-center rounded-full"
               >
-                <Image src={"/create.png"} alt="Create Icon" width={16} height={16} />
+                <Image src={"/img/create.png"} alt="Create Icon" width={16} height={16} />
               </div>
             )}
           </div>
@@ -213,7 +214,7 @@ const TemoignageListPage = () => {
     </div>
   
     {/* SCROLLABLE LIST */}
-    <div className="overflow-y-auto h-[60vh] mt-4 dark:bg-gray-900">
+    <div className="assignment-list overflow-y-auto h-[600px] mt-4">
       {filteredItems.map((temoignage: temItem) => (
         <TemView
           key={temoignage.id}

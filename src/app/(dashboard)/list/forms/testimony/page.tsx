@@ -13,7 +13,7 @@ interface Payload {
   introduction: string;
   conclusion: string;
   Date: string;
-  développement: string;
+  developpement: string;
   platform: string;
   title: string;
   storyCat: string;
@@ -80,11 +80,11 @@ const Testify: React.FC = () => {
     try {
       const payload: Payload = {
         Autor: nameRef.current.value,
-        email: emailRef.current.value,
+        email: emailRef.current.value||'',
         introduction: descriptionRef.current.value,
         conclusion: adviceRef.current?.value || '',
         Date: incidentdateRef.current.value,
-        développement: additionalinfoRef.current?.value || '',
+        developpement: additionalinfoRef.current?.value || '',
         platform: platformRef.current.value,
         title: titleRef.current.value,
         storyCat: categoryRef.current.value,
@@ -102,7 +102,7 @@ const Testify: React.FC = () => {
       alert('Témoignage partagé avec succes !');
      router.push('/list/temoignage');
     } catch (error) {
-      console.error('Error adding document: ', error);
+     // console.error('Error adding document: ', error);
       setErrors({ general: ['An error occurred while submitting your testimony.'] });
     } finally{
       setIsSubmitting(false); // Re-enable button after completion
@@ -159,7 +159,7 @@ const Testify: React.FC = () => {
     {/* Date Field */}
     <div>
       <label htmlFor="incident-date" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-        Date de l'Incident:
+        Date de l&apos;Incident:
       </label>
       <input
         ref={incidentdateRef}
@@ -193,6 +193,8 @@ const Testify: React.FC = () => {
         <option value="instagram">Instagram</option>
         <option value="email">Email</option>
         <option value="autres">Autres</option>
+        <option value="vente">e-commerce</option>
+        <option value="banque">Carte/compte bancaire</option>
       </select>
     </div>
 
@@ -215,6 +217,7 @@ const Testify: React.FC = () => {
         <option value="cyberdiscipline">Cyberdiscipline</option>
         <option value="cyberintimidation">Cyberintimidation</option>
         <option value="catfish">Catfish</option>
+       
         <option value="autres">Autres</option>
       </select>
     </div>
@@ -233,7 +236,7 @@ const Testify: React.FC = () => {
       >
         <option value="">Sélectionnez un pays</option>
         <option value="cameroun">Cameroun</option>
-        <option value="côte d'ivoire">Côte d'Ivoire</option>
+        <option value="côte d'ivoire">Côte d&apos;Ivoire</option>
         <option value="gabon">Gabon</option>
         <option value="autres">Autres</option>
       </select>
@@ -257,7 +260,7 @@ const Testify: React.FC = () => {
     {/* Description */}
     <div>
       <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-        Description de l'Incident:
+        Description de l&apos;Incident:
       </label>
       <textarea
         id="description"
@@ -333,7 +336,7 @@ const Testify: React.FC = () => {
         id="email"
         placeholder="Votre email"
         className="mt-1 block w-full p-3 border rounded-lg border-gray-300 dark:bg-gray-700 dark:text-gray-200  focus:outline-none focus:ring-2 focus:ring-blue-500"
-        required
+       
       />
     </div>
 

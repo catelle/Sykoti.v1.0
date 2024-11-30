@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import fetchHistoryItems, { fetchTemoignageItemById, incrementLike } from "@/app/action/fetchData";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,7 @@ const DetailView: FC = ({ }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
   const hasLiked = Array.isArray(item?.likes) && user?.uid ? item.likes.includes(user.uid) : false;
+  const [itemsPerView, setItemsPerView] = useState(3); // Default items per view
 
 
   type HistoryItem = {
@@ -62,7 +63,7 @@ const DetailView: FC = ({ }) => {
           setItem(data);
         }
       } catch (error) {
-        console.error("Error fetching item data:", error);
+       // console.error("Error fetching item data:", error);
       } finally {
         setLoading(false);
       }
@@ -88,7 +89,17 @@ const DetailView: FC = ({ }) => {
   //   return () => window.removeEventListener("resize", handleResize);
   // }, []);
 
-  const itemsPerView = window.innerWidth < 640 ? 2 : 3;
+  // Only execute on the client side (browser)
+  useEffect(() => {
+    const handleResize = () => {
+      setItemsPerView(window.innerWidth < 640 ? 2 : 3);
+    };
+
+    handleResize(); // Initialize itemsPerView based on window size
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handlePrev = () => {
     setCurrentIndexh((prevIndex) => Math.max(prevIndex - itemsPerView, 0));
@@ -102,12 +113,12 @@ const DetailView: FC = ({ }) => {
 
   const handleLike = async (itemsend: HistoryItem, userId: string) => {
 
-    console.log("Attempting to like the item...");
+   // console.log("Attempting to like the item...");
     const itemId = itemsend.id;
     try {
       // Check if the user has already voted
       if (itemsend.likes && Array.isArray(itemsend.likes) && itemsend.likes.includes(user?.uid)) {
-        console.log("User has already liked this item.");
+       // console.log("User has already liked this item.");
       } else {
 
 
@@ -129,11 +140,11 @@ const DetailView: FC = ({ }) => {
           )
         );
 
-        console.log("Item successfully liked!");
+      //  console.log("Item successfully liked!");
         router.push(`/list/detailsView?id=${itemId}`)
       }
     } catch (error) {
-      console.error("Error liking the item:", error);
+     // console.error("Error liking the item:", error);
 
       // Optionally, you could display a user-friendly error message here.
       alert("Failed to like the item. Please try again later.");
@@ -149,7 +160,7 @@ const DetailView: FC = ({ }) => {
     if (id) {
       router.push(`/list/detailsView?id=${id}`);
     } else {
-      console.error("Item ID is undefined");
+     // console.error("Item ID is undefined");
     }
   };
 
@@ -180,10 +191,11 @@ const DetailView: FC = ({ }) => {
                 }
               }}
             >
-              👍 {item.likecount} Likes
+              👍 {item.likes?.length || 0} 
+              Likes
             </button>
           </strong>
-          <strong className="text-gray-900 dark:text-white">👀 {item.votecount} Views</strong>
+          <strong className="text-gray-900 dark:text-white">👀 {item.votes?.length||0} lectures</strong>
         </p>
       </>
     );
@@ -234,7 +246,7 @@ const DetailView: FC = ({ }) => {
                 }}
               >
                 {items.slice(currentIndexh, currentIndexh + itemsPerView).map((item) => (
-                  <div
+                  <button
                     key={item.id}
                     className={`flex-shrink-0 h-30 ${itemsPerView === 2 ? "w-1/2" : "w-1/3"}`}
                     onClick={(event) => handleItemClick(item?.id)} // Pass both event and item
@@ -250,7 +262,7 @@ const DetailView: FC = ({ }) => {
                         {item.title}
                       </p>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </Carousel>
@@ -282,4 +294,11 @@ const DetailView: FC = ({ }) => {
   );
 };
 
-export default DetailView;
+// Wrap DetailView in Suspense
+export default function Page() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <DetailView />
+    </Suspense>
+  );
+}

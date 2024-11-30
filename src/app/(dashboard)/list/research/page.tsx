@@ -1,12 +1,15 @@
-"use client"
-import { useRouter, useSearchParams } from "next/navigation";
+"use client";
 
+import { useEffect, useState } from "react";
 
 const ResearchPage: React.FC = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams(); // Hook to access query params
-  const item = searchParams.get('item'); // Get the 'item' query parameter
-  const selectedItem = item ? JSON.parse(item as string) : null; // Parse the passed item into an object
+  const [selectedItem, setSelectedItem] = useState<any>(null);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const item = searchParams.get("item");
+    setSelectedItem(item ? JSON.parse(item) : null);
+  }, []);
 
   return (
     <div>

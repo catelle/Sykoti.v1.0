@@ -27,7 +27,7 @@ const config: Config = {
         lamaSkyLight: "#EDF9FD",
         lamaPurpleLight: '#F0E0F0', // Adjust to your light purple
         lamaPurpleDark: '#2C1E2F',  // Adjust to your dark purple
-       
+        redpink: '#740a36',
         lamaYellow: "#FAE27C",
         lamaYellowLight: "#FEFCE8",
 		background: 'hsl(var(--background))',

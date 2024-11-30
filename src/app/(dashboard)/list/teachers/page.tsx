@@ -1,3 +1,4 @@
+"use client"
 import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
@@ -6,7 +7,7 @@ import { role, teachersData } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type Teacher = {
   id: number;
@@ -58,13 +59,21 @@ const columns = [
 
 const TeacherListPage = () => {
   const router= useRouter();
-const token= localStorage.getItem("ACCESS_TOKEN");
+  const [token, setToken] = useState<string | null>(null);
+  
+  
+ 
+  if (!token) {
+    console.log("no token");
+   // router.push("/login");
+  }
 
+  useEffect(() => {
+    // Access localStorage on the client
+    const token =  localStorage.getItem("ACCESS_TOKEN");
+    setToken(token);
+  }, []); // Empty dependency array ensures it runs once on the client
 
-if (!token) {
-  console.log("no token");
- // router.push("/login");
-}
 
 
   const renderRow = (item: Teacher) => (

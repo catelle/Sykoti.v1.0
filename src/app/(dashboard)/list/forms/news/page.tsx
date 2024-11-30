@@ -73,10 +73,10 @@ const News = () => {
 
       payload.image = imageUrl; // Now this is valid because `image` is part of the Payload type
       await addDoc(collection(db, 'NewsCollection'), payload);
-      console.log('Document successfully written!');
+     // console.log('Document successfully written!');
       showNotification();
     } catch (error) {
-      console.error('Error adding document: ', error);
+     // console.error('Error adding document: ', error);
       setErrors({ general: ['An error occurred while adding the scam item.'] });
     }
 
@@ -119,7 +119,7 @@ const News = () => {
       )} */}
   
       <div className="mb-4">
-        <label htmlFor="incident-date" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Date de l'actualité:</label>
+        <label htmlFor="incident-date" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Date de l&apos;actualité:</label>
         <input
           ref={incidentdateRef}
           type="date"
@@ -189,7 +189,7 @@ const News = () => {
           <option value="cameroun">Cameroun</option>
           <option value="france">France</option>
           <option value="belgique">Belgique</option>
-          <option value="côte d'ivoire">Côte d'Ivoire</option>
+          <option value="côte d'ivoire">Côte d`&apos;`Ivoire</option>
           <option value="autres">Autres</option>
         </select>
       </div>

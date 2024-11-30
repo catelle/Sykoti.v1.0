@@ -24,13 +24,22 @@ const [isAdmin, setIsAdmin]= useState(false);
 const [user, loading, error]= useAuthState(auth);
 const [userData, setUserData] = useState<UserData | null>(null); 
 const router= useRouter();
-const token= localStorage.getItem("ACCESS_TOKEN");
-
-
+const [token, setToken] = useState<string | null>(null);
+  
+  
+ 
 if (!token) {
   console.log("no token");
  // router.push("/login");
 }
+
+useEffect(() => {
+  // Access localStorage on the client
+  const token =  localStorage.getItem("ACCESS_TOKEN");
+  setToken(token);
+}, []); // Empty dependency array ensures it runs once on the client
+
+
 
 
 

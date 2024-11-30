@@ -33,19 +33,19 @@ const MessageDetail = () => {
         const messageDoc = await getDoc(messageRef);
   
         if (messageDoc.exists()) {
-          console.log("Retrieved Document Data:", messageDoc.data()); // Debugging
+         // console.log("Retrieved Document Data:", messageDoc.data()); // Debugging
           
           setMessage({ id: messageDoc.id, ...messageDoc.data() } as Message);
         } else {
-          console.log("No such document!");
+          //console.log("No such document!");
         }
       } catch (err: unknown) {
         if (err instanceof Error) {
-          console.log("Error fetching message:", err);
-          setError(err.message);
+         // console.log("Error fetching message:", err);
+         // setError(err.message);
         } else {
-          console.log("An unknown error occurred");
-          setError("An unknown error occurred");
+         // console.log("An unknown error occurred");
+          //setError("An unknown error occurred");
         }
       }
     };
@@ -61,7 +61,7 @@ const MessageDetail = () => {
     <div className="flex flex-col items-center bg-gray-100 dark:bg-gray-900 min-h-screen py-10 px-6">
     <div className="bg-white dark:bg-gray-800 border border-0 w-full max-w-2xl shadow-lg rounded-lg p-6 space-y-6">
     <h2 className="text-3xl font-semibold text-gray-800 dark:text-white mb-6">
-      Hey, vous nous avez envoyé une demande d'aide récemment !
+      Hey, vous nous avez envoyé une demande d`&apos;`aide récemment !
     </h2>
   
     {/* Date */}

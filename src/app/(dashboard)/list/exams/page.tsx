@@ -1,3 +1,4 @@
+"use client"
 import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
@@ -5,7 +6,7 @@ import TableSearch from "@/components/TableSearch";
 import { examsData, role } from "@/lib/data";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type Exam = {
   id: number;
@@ -42,7 +43,17 @@ const columns = [
 
 const ExamListPage = () => {
   const router= useRouter();
-const token= localStorage.getItem("ACCESS_TOKEN");
+  const [token, setToken] = useState<string | null>(null);
+  
+  
+ 
+ 
+
+  useEffect(() => {
+    // Access localStorage on the client
+    const token =  localStorage.getItem("ACCESS_TOKEN");
+    setToken(token);
+  }, []); // Empty dependency array ensures it runs once on the client
 
 
 if (!token) {

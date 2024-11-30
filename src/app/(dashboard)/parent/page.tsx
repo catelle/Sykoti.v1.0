@@ -26,16 +26,20 @@ interface UserData {
 const ParentPage = () => {
   const router= useRouter();
   const [pseudo, setPseudo] = useState("");
-  const token= localStorage.getItem("ACCESS_TOKEN");
   const [user, loading, error]= useAuthState(auth);
-  const [userData, setUserData] = useState<UserData | null>(null); 
-    
-    
-   
-      if (!token) {
-        router.push("/login");
-      }
-    
+  const [userData, setUserData] = useState<UserData | null>(null);  
+  const [isClient, setIsClient] = useState(false);
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    setIsClient(true); // Mark as client-side
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    setToken(token);
+  }, []);
+
+  if (!isClient) {
+    return null; // Avoid rendering on the server
+  }
   
     useEffect(() => {
       const getUserData = async () => {

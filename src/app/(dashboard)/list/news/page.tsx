@@ -6,7 +6,6 @@ import TableSearch from "@/components/TableSearch";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { role } from "@/lib/data";
-import DetailModal from "../DetailsComponent/page";
 import { useRouter } from "next/navigation";
 import DetailNewsModal from "../detailsNews/pages";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -37,7 +36,7 @@ const NewsView = ({ newsItem, onClick }: { newsItem: NewsItem; onClick: (item: N
     >
       <div className="relative">
         <Image
-          src={newsItem.image || '/search.png'} // Fallback to a default image
+          src={newsItem.image || '/img/search.png'} // Fallback to a default image
           alt=""
           width={100}
           height={100}
@@ -69,10 +68,10 @@ const NewsPage = () => {
     const loadScamItems = async () => {
       try {
         const newsItems = await fetchNewsItems();
-        console.log(newsItems);
+        //console.log(newsItems);
         setItems(newsItems);
       } catch (error) {
-        console.error("Error fetching scam items:", error);
+       // console.error("Error fetching scam items:", error);
       }
     };
     loadScamItems();
@@ -126,7 +125,7 @@ const NewsPage = () => {
         }
       }
     } catch (error) {
-      console.error("Error marking news as read:", error);
+     // console.error("Error marking news as read:", error);
     }
   };
 

@@ -43,32 +43,32 @@ const StudentPage = () => {
 
   const images = [
     {
-      url: "/logo.png",
+      url: "/img/logo.png",
       text: "Aide",
       title: "Vous avez un problème en ligne ?",
       description: "Nous sommes là pour vous, cliquez ce bouton !",
       link: "/list/forms/alert",
     },
     {
-      url: "/logo.png",
+      url: "/img/logo.png",
       text: "Témoigner",
       title: "Victime de cybercrime ?",
       description: "Partagez votre expérience, prévenons la repétition.",
       link: "/list/forms/testimony",
     },
     {
-      url: "/avatar.png",
+      url: "/img/avatar.png",
       text: "Partager",
       title: "Un scam ou une arnaque se répend en ligne ?",
       description: "Partagez-le pour informer les autres",
       link: "/list/forms/scam",
     },
     {
-      url: "/logo.png",
+      url: "/img/logo.png",
       text: "Voir pllus",
       title: "Devenez un Cyberambassadeur",
       description: "Formez vous à la sécurité en ligne, soyez un atout précieux.",
-      link: "/link-to-slide3",
+      link: "/cybera",
     },
   ];
 
@@ -174,9 +174,9 @@ const StudentPage = () => {
         votes: arrayUnion(userId),
         voteCount: increment(1),
       });
-      console.log("View count incremented successfully");
+   //   console.log("View count incremented successfully");
     } catch (error) {
-      console.error("Failed to increment views", error);
+    //  console.error("Failed to increment views", error);
     }
   };
 
@@ -184,7 +184,7 @@ const StudentPage = () => {
     const userId = user?.uid;
 
     if (!userId) {
-      console.error("User must be logged in to perform this action.");
+      //console.error("User must be logged in to perform this action.");
       return;
     }
 
@@ -195,7 +195,7 @@ const StudentPage = () => {
     if (!item.votes.includes(userId)) {
       item.votes.push(userId);
       await incrementViews(item.id, userId);
-      console.log(`${userId} viewed item ${item.id}`);
+     // console.log(`${userId} viewed item ${item.id}`);
     }
     
 
@@ -209,7 +209,7 @@ const StudentPage = () => {
       onMouseEnter={() => setIsAutoplayActive(false)} // Stop autoplay when mouse enters
       onMouseLeave={() => setIsAutoplayActive(true)} // Resume autoplay when mouse leaves
     >
-      <Carousel className="flex flex-col xl:flex-row gap-4 z-10">
+      <Carousel style={{ borderRadius: '15px' }} className="flex flex-col xl:flex-row gap-4 z-10">
         {images.map((image, index) => (
           <CarouselItem
             key={index}
@@ -248,7 +248,7 @@ const StudentPage = () => {
     </div>
   
     <div className="mb-6">
-      <Carousel className="flex items-center relative">
+      <Carousel style={{ borderRadius: '15px' }}  className="flex items-center relative">
         <div
           ref={carouselRef}
           className="flex overflow-x-scroll gap-4 w-full scrollbar-hide"

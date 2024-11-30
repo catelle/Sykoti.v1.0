@@ -29,7 +29,7 @@ const DetailLoiView = () => {
           const foundItem = loisItems.find((loi) => loi.id === id); // Find the item by ID
           setItem(foundItem || null); // Set the item if found
         } catch (error) {
-          console.error("Error fetching item:", error);
+         // console.error("Error fetching item:", error);
         } finally {
           setLoading(false);
         }

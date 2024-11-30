@@ -297,7 +297,7 @@ const AddClient = () => {
           render={() => (
             <FormItem>
               <div className="mb-4">
-                <FormLabel className="text-base">KPI (Sélectionnez jusqu'à 7)</FormLabel>
+                <FormLabel className="text-base">KPI (Sélectionnez jusqu`&apos;`à 7)</FormLabel>
                 <FormDescription>
                   Selectionner les points sur lesquels vous souhaitez travailler au sein de votre equipe.
                 </FormDescription>
@@ -344,7 +344,7 @@ const AddClient = () => {
               name="license_expiry"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Date d'expiration de la licence</FormLabel>
+                  <FormLabel>Date d`&apos;`expiration de la licence</FormLabel>
                   <FormControl>
                     <Input {...field} type="date" disabled={loading} />
                   </FormControl>
@@ -358,7 +358,7 @@ const AddClient = () => {
               name="max_users"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nombre maximum d'utilisateurs</FormLabel>
+                  <FormLabel>Nombre maximum d`&apos;`utilisateurs</FormLabel>
                   <FormControl>
                     <Input {...field} type="text" placeholder="Max utilisateurs" disabled={loading} />
                   </FormControl>
